@@ -1,0 +1,110 @@
+{% extends 'index.html' %} 
+{% block title %} 
+    Validation App - Dashboard User
+{% endblock %} 
+{% block content %}
+
+<div class="header bg-default pb-6">
+    <div class="container-fluid">
+        <div class="header-body">
+            <div class="row align-items-center pt-5 pb-4">
+                <div class="col-lg-6 col-7">
+                    <h6 class="h2 text-white d-inline-block mb-0">Hello,</h6>
+                    <p class="text-white">
+                        Upload dokumen anda untuk validasi ya!
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid mt--6">
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-header border-0">
+                    <h3 class="mb-0">Dokumen</h3>
+                </div>
+                <div class="table-responsive">
+                    <table class="table align-items-center table-flush">
+                        <thead class="thead-light">
+                            <tr class="text-center">
+                                <th scope="col" class="sort" data-sort="step">Kategori</th>
+                                <th scope="col" class="sort" data-sort="status">File</th>
+                                <th>Status</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody class="list">
+                            {% if lusers > 0 %}
+                                {% for row in users %}
+                                    <tr>
+                                        <td class="text-center">
+                                            {{ row['kategori'] }}
+                                        </td>
+                                        <td class="text-center">
+                                            <a href="/download/{{ row['file'] }}" class="btn btn-sm btn-default">
+                                                Download File
+                                            </a>
+                                        </td>
+                                        <td class="text-center">
+                                            <span class="badge badge-default">Approved</span>
+                                        </td>
+                                        <td>
+                                            <a href="/verify" class="badge badge-secondary">Verify +</a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            {% else %}
+                                <tr>
+                                    <td class="text-center" colspan="5">Ooops, kamu belum pernah mengupload file apapun</td>
+                                </tr>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer">
+                    <a href="" class="btn btn-default btn-sm" data-toggle="modal" data-target="#exampleModal">
+                        Upload Dokumen +
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Upload Data</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form role="form" action="/upload" method="POST" enctype ="multipart/form-data">
+                    <div class="custom-file">
+                        <label class="form-control-label">Plih Dokumen:</label>
+                        <input type="file" name="filela" class="form-control" required>
+                    </div>
+                    <div class="form-group mt-4">
+                        <label for="kategori">Kategori</label>
+                        <select class="form-control" id="kategori" name="kategori" required>
+                            <option value="BPOM">BPOM</option>
+                            <option value="Halal">Halal</option>
+                        </select>
+                    </div>
+                    <div class="mt-5">
+                        <input type="submit" class="btn btn-default"></input>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cencel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+          
+
+{% endblock %}

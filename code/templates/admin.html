@@ -1,0 +1,64 @@
+{% extends 'index.html' %} 
+{% block title %} 
+    Validation App - Dashboard User
+{% endblock %} 
+{% block content %}
+
+<div class="header bg-default pb-6">
+    <div class="container-fluid">
+        <div class="header-body">
+            <div class="row align-items-center pt-5 pb-4">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid mt--6">
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-header border-0">
+                    <h3 class="mb-0">Dokumen User</h3>
+                </div>
+                <div class="table-responsive">
+                    <table class="table align-items-center table-flush">
+                        <thead class="thead-light">
+                            <tr class="text-center">
+                                <th scope="col" class="sort" data-sort="step">User</th>
+                                <th scope="col" class="sort" data-sort="status">Kategori</th>
+                                <th scope="col" class="sort" data-sort="status">File</th>
+                                <th>Status</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody class="list">
+                            {% for row in users %}
+                                <tr>
+                                    <td class="text-center">
+                                        {{ row['nama_user'] }}
+                                    </td>
+                                    <td class="text-center">
+                                        {{ row['kategori'] }}
+                                    </td>
+                                    <td class="text-center">
+                                        <a href="/download/{{ row['file'] }}" class="btn btn-sm btn-default">
+                                            Download
+                                        </a>
+                                    </td>
+                                    <td class="text-center">
+                                        Approved
+                                    </td>
+                                    <td>
+                                        <a href="/verify" class="badge badge-secondary">Verify +</a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

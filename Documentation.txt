@@ -1,0 +1,12 @@
+Python 3.12.2 = App
+Flask = Frame Work
+Rest API = API
+MySQL = Database
+----
+File API di pindahkan ke htdocs XAMPP
+----
+myenv\Scripts\activate
+----
+pip install Flask Flask-JSON Werkzeug requests bcrypt
+----
+flask run --debug
