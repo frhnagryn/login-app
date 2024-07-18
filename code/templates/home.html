@@ -30,29 +30,46 @@
                     <table class="table align-items-center table-flush">
                         <thead class="thead-light">
                             <tr class="text-center">
+                                <th scope="col" class="sort" data-sort="step">Nama File</th>
                                 <th scope="col" class="sort" data-sort="step">Kategori</th>
+                                <th scope="col" class="sort" data-sort="step">Lampiran</th>
                                 <th scope="col" class="sort" data-sort="status">File</th>
                                 <th>Status</th>
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody class="list">
-                            {% if lusers > 0 %}
-                                {% for row in users %}
+                            {% if file_uploaded|length > 0 %}
+                                {% for row in file_uploaded %}
                                     <tr>
                                         <td class="text-center">
-                                            {{ row['kategori'] }}
+                                            {{ row.metaname }}
                                         </td>
                                         <td class="text-center">
-                                            <a href="/download/{{ row['file'] }}" class="btn btn-sm btn-default">
+                                            {% if row.status == 1 %}
+                                                Izin Edar BPOM
+                                            {% elif row.status == 2 %}
+                                                Sertifikasi Halal MUI
+                                            {% else %}
+                                                Tidak Valid
+                                            {% endif %}
+                                        </td>
+                                        <td class="text-center">
+                                            <a href="/download/{{ row.path }}" class="btn btn-sm btn-default">
                                                 Download File
                                             </a>
                                         </td>
                                         <td class="text-center">
-                                            <span class="badge badge-default">Approved</span>
+                                            {% if row.status == 1 %}
+                                                <span class="badge badge-success">Approved</span>
+                                            {% elif row.status == 2 %}
+                                                <span class="badge badge-success">Approved</span>
+                                            {% else %}
+                                                <span class="badge badge-danger">Rejected</span>
+                                            {% endif %}
                                         </td>
                                         <td>
-                                            <a href="/verify" class="badge badge-secondary">Verify +</a>
+                                            <a href="" class="badge badge-secondary" data-toggle="modal" data-target="#detailsData">Details +</a>
                                         </td>
                                     </tr>
                                 {% endfor %}
@@ -88,13 +105,6 @@
                     <div class="custom-file">
                         <label class="form-control-label">Plih Dokumen:</label>
                         <input type="file" name="filela" class="form-control" required>
-                    </div>
-                    <div class="form-group mt-4">
-                        <label for="kategori">Kategori</label>
-                        <select class="form-control" id="kategori" name="kategori" required>
-                            <option value="BPOM">BPOM</option>
-                            <option value="Halal">Halal</option>
-                        </select>
                     </div>
                     <div class="mt-5">
                         <input type="submit" class="btn btn-default"></input>

@@ -24,6 +24,13 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
+                {% elif category == 'warning': %}
+                <div class="alert alert-la alert-warning alert-dismissible show" role="alert">
+                    <span class="alert-text pb-3 pt-3"><strong>Warning</strong> <br> {{message}}</span>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
                 {% else: %}
                     <div class="alert alert-la alert-success alert-dismissible show" role="alert">
                         <span class="alert-text pb-3 pt-3"><strong>Success</strong> <br> {{message}}</span>
@@ -79,7 +86,7 @@
                             <div class="media align-items-center">
                                 <div class="media-body  mr-4  d-none d-lg-block">
                                     <span class="mb-0 text-sm  font-weight-bold">
-                                        {{session['data']['first_name']}} {{session['data']['last_name']}}
+                                        {{session['name']}}
                                     </span>
                                 </div>
                             </div>
